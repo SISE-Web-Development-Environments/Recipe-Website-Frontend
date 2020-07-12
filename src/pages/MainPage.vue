@@ -5,20 +5,15 @@
       <b-col>
         <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" />
       </b-col>
-      <b-col>
-        <!-- <router-link
-          v-if="!$root.store.username"
-          to="/login"
-          tag="button"
-        >You need to Login to vue this</router-link>-->
+
+      <b-col>        
         <Login v-if="!$root.store.username" title="Login" />
         <!-- {{ !$root.store.username }} -->
         <RecipePreviewList
           v-else
           title="Last Viewed Recipes"
           :class="{
-          RandomRecipes: true,
-          blur: !$root.store.username,
+          RandomRecipes: true,          
           center: true
         }"
           disabled
