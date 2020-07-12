@@ -21,7 +21,17 @@
 export default {
   name: "App",
   methods: {
-    Logout() {
+    async Logout() {
+      try {
+        console.log(this.$root.store.username);
+        const response = await this.axios.post(
+          "http://localhost:4000/auth/Logout",         
+        );
+        console.log(response);
+            
+      } catch (err) {
+        console.log(err.response);        
+      }
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
 

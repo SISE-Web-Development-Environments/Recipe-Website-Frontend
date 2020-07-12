@@ -7,6 +7,7 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
+  // mode: "hash",
   routes,
 });
 
@@ -38,6 +39,7 @@ import {
   LayoutPlugin,
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
+axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(
   function(config) {
@@ -61,7 +63,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;

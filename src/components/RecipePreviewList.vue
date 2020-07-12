@@ -4,11 +4,11 @@
       {{ title }}:
       <slot></slot>
     </h3>
-    <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
+    
+      <b-row v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+      </b-row>
+    
   </b-container>
 </template>
 
@@ -40,11 +40,11 @@ export default {
           "https://test-for-3-2.herokuapp.com/recipes/random"
         );
 
-        // console.log(response);
+        
         const recipes = response.data.recipes;
         this.recipes = [];
         this.recipes.push(...recipes);
-        // console.log(this.recipes);
+        
       } catch (error) {
         console.log(error);
       }
@@ -55,6 +55,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  min-height: 400px;
+  min-height: 800px;
+ 
 }
 </style>
