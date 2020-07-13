@@ -5,11 +5,13 @@ import axios from "axios";
 
 import routes from "./routes";
 import VueRouter from "vue-router";
+
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
-
+import VueCookies from 'vue-cookies';
+Vue.use(VueCookies);
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
