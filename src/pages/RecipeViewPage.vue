@@ -70,31 +70,37 @@ export default {
       }
 
       let {
-        analyzedInstructions,
-        instructions,
-        extendedIngredients,
-        aggregateLikes,
+        id,
+        title,
         readyInMinutes,
+        aggregateLikes,
+        vegan,
+        glutenFree,
         image,
-        title
-      } = response.data.recipe;
+        instructions,
+        servings,
+        extendedIngredients  
+                
+      } = response.data.recipe;//todo: ?
 
-      let _instructions = analyzedInstructions
-        .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-          return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
+      // let _instructions = analyzedInstructions
+      //   .map((fstep) => {
+      //     fstep.steps[0].step = fstep.name + fstep.steps[0].step;
+      //     return fstep.steps;
+      //   })
+      //   .reduce((a, b) => [...a, ...b], []);
 
       let _recipe = {
-        instructions,
-        _instructions,
-        analyzedInstructions,
-        extendedIngredients,
-        aggregateLikes,
+        id,
+        title,
         readyInMinutes,
+        aggregateLikes,
+        vegan,
+        glutenFree,
         image,
-        title
+        instructions,
+        servings,
+        extendedIngredients  
       };
 
       this.recipe = _recipe;
