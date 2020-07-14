@@ -23,6 +23,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    request:{
+      type: String,
+      required: true
     }
   },
   data() {
@@ -36,11 +40,18 @@ export default {
   methods: {
     async updateRecipes() {
       try {
-        const response = await this.axios.get(
-          "http://localhost:4000/recipes/getThreeRandomRecipes"
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
-        );
-
+        let x = this.request;
+        let response = null;
+        if(x=="random"){          
+          response = await this.axios.get(
+          "http://localhost:4000/recipes/getThreeRandomRecipes"          
+          );
+        }
+        if(x=="seen"){          
+          response = await this.axios.get(
+          "http://localhost:4000/users/getLastThreeSeenRecipes"          
+          );
+        }      
         
         const recipes = response.data.data;// instead of data.recipes
         this.recipes = [];
