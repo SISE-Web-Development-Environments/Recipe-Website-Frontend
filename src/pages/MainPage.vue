@@ -3,7 +3,7 @@
     <h1 class="title">Main Page</h1>
     <b-row>
       <b-col>
-        <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" />
+        <RecipePreviewList title="Randome Recipes" request="random" class="RandomRecipes center" />
       </b-col>
 
       <b-col>        
@@ -12,6 +12,7 @@
         <RecipePreviewList
           v-else
           title="Last Viewed Recipes"
+          request="seen"
           :class="{
           RandomRecipes: true,          
           center: true
