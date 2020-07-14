@@ -4,7 +4,8 @@
     class="recipe-preview"
   >
     <div class="recipe-body">
-      <img :src="recipe.image" class="recipe-image" />
+      <img :src="recipe.image" class="recipe-image">
+      <i class="fa fa-heart"></i>
     </div>
     <div class="recipe-footer">
       <div :title="recipe.title" class="recipe-title">
@@ -25,6 +26,18 @@ export default {
       type: Object,
       required: true
     }  
+  },
+  data() {
+    return {
+      seen: undefined,
+      addedToFavorite: undefined
+    }
+  },
+  mounted() {
+
+  },
+  methods: {
+
   }
 };
 </script>
