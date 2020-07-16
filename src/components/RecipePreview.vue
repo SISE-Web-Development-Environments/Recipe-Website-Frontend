@@ -1,22 +1,27 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img :src="recipe.image" class="recipe-image">
-      <i class="fa fa-heart"></i>
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
+  <div class="recipe-preview">
+    <router-link
+      :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+      @click.native="addToSeens"
+      class="recipe-link"
+    >
+      <div class="recipe-body">
+        <img :src="recipe.image" class="recipe-image" />
       </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
+      <div class="recipe-footer">
+        <div :title="recipe.title" class="recipe-title">{{ recipe.title }}</div>
+        <ul class="recipe-overview">
+          <li>{{ recipe.readyInMinutes }} minutes</li>
+          <li>{{ recipe.aggregateLikes }} likes</li>
+        </ul>
+      </div>
+    </router-link>
+    <div class="recipe-indications">
+      <b-button class="recipe-favorite" @click="addToFavorites">
+        <i id="heart" class="fa fa-heart"></i>
+      </b-button>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -25,19 +30,47 @@ export default {
     recipe: {
       type: Object,
       required: true
-    }  
+    }
   },
   data() {
     return {
-      seen: undefined,
-      addedToFavorite: undefined
-    }
+      seen: false,
+      addedToFavorite: false
+    };
   },
   mounted() {
-
+    
   },
   methods: {
-
+    async addToFavorites() {
+      if (!this.addedToFavorite) {
+        try {
+          response = await this.axios.post(
+            "http://localhost:4000/users/addFavoriteRecipe",
+            {
+              recipe_id: this.recipe.id
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+    async addToSeens() {
+      let x=3;
+      if (!this.seen) {
+        try {
+          response = await this.axios.post(
+            "http://localhost:4000/users/addSeenRecipe",
+            {
+              recipe_id: this.recipe.id
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
   }
 };
 </script>
@@ -45,18 +78,22 @@ export default {
 <style scoped>
 .recipe-preview {
   display: inline-block;
+  position: relative;
   width: 60%;
   height: 40%;
-  position: relative;
   margin: 10px 10px;
 }
-.recipe-preview > .recipe-body {
+
+.recipe-preview .recipe-link {
+}
+
+.recipe-preview .recipe-link .recipe-body {
   width: 100%;
   height: 80%;
   position: relative;
 }
 
-.recipe-preview .recipe-body .recipe-image {
+.recipe-preview .recipe-link .recipe-body .recipe-image {
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -69,13 +106,13 @@ export default {
   background-size: cover;
 }
 
-.recipe-preview .recipe-footer {
+.recipe-preview .recipe-link .recipe-footer {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.recipe-preview .recipe-footer .recipe-title {
+.recipe-preview .recipe-link .recipe-footer .recipe-title {
   padding: 10px 10px;
   width: 100%;
   font-size: 12pt;
@@ -86,7 +123,7 @@ export default {
   text-overflow: ellipsis;
 }
 
-.recipe-preview .recipe-footer ul.recipe-overview {
+.recipe-preview .recipe-link .recipe-footer ul.recipe-overview {
   padding: 5px 10px;
   width: 100%;
   display: -webkit-box;
@@ -105,7 +142,7 @@ export default {
   margin-bottom: 0px;
 }
 
-.recipe-preview .recipe-footer ul.recipe-overview li {
+.recipe-preview .recipe-link .recipe-footer ul.recipe-overview li {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -116,5 +153,19 @@ export default {
   width: 90px;
   display: table-cell;
   text-align: center;
+}
+
+.recipe-preview .recipe-indications {
+}
+
+.recipe-preview .recipe-indications .recipe-favorite {
+  background-color: white;
+}
+#heart {
+  color: rgb(110, 20, 20);
+}
+
+#heart:hover {
+  color: rgb(226, 52, 52);
 }
 </style>
