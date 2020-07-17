@@ -8,16 +8,16 @@
       <div class="recipe-body">
         <img :src="recipe.image" class="recipe-image" />
       </div>
-      <div class="recipe-footer">
+      <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']" >
         <div :title="recipe.title" class="recipe-title">{{ recipe.title }}</div>
-        <ul class="recipe-overview">
+        <ul class ="recipe-overview">
           <li>{{ recipe.readyInMinutes }} minutes</li>
           <li>{{ recipe.aggregateLikes }} likes</li>
         </ul>
       </div>
     </router-link>
     <div class="recipe-indications">
-      <b-button class="recipe-favorite" @click="addToFavorites">
+      <b-button v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']" @click="addToFavorites">
         <i id="heart" class="fa fa-heart"></i>
       </b-button>
     </div>
@@ -39,25 +39,59 @@ export default {
     };
   },
   mounted() {
-    
+    this.updateIsFavorite();
+    this.updateIsSeen();
   },
   methods: {
+    async updateIsFavorite() {
+      try {
+        const response = await this.axios.get(
+          "http://localhost:4000/users/isFavorite",
+          {
+            params: {
+              recipe_id: this.recipe.id
+            }
+          }
+        );            
+        this.addedToFavorite = response.data.answer;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+     async updateIsSeen() {
+      try {
+        const response = await this.axios.get(
+          "http://localhost:4000/users/isSeen",
+          {
+            params: {
+              recipe_id: this.recipe.id
+            }
+          }
+        );            
+        this.seen = response.data.answer;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     async addToFavorites() {
       if (!this.addedToFavorite) {
         try {
-          response = await this.axios.post(
+          const response = await this.axios.post(
             "http://localhost:4000/users/addFavoriteRecipe",
             {
               recipe_id: this.recipe.id
-            }
+            }            
           );
+          this.addedToFavorite=true;
         } catch (error) {
           console.log(error);
         }
       }
     },
     async addToSeens() {
-      let x=3;
+      
       if (!this.seen) {
         try {
           response = await this.axios.post(
@@ -81,11 +115,12 @@ export default {
   position: relative;
   width: 60%;
   height: 40%;
-  margin: 10px 10px;
+  margin: 10px 10px;  
 }
 
-.recipe-preview .recipe-link {
-}
+/* .recipe-preview .recipe-link:hover {
+  color:saddlebrown
+} */
 
 .recipe-preview .recipe-link .recipe-body {
   width: 100%;
@@ -106,10 +141,19 @@ export default {
   background-size: cover;
 }
 
+.recipe-preview .recipe-link .recipe-body .recipe-image:hover {
+border: 3px solid #42b983;
+}
+
 .recipe-preview .recipe-link .recipe-footer {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden;  
+}
+
+.recipe-preview .recipe-link:hover {
+  text-decoration: underline;
+  text-decoration-color: rgb(35, 26, 163);  
 }
 
 .recipe-preview .recipe-link .recipe-footer .recipe-title {
@@ -121,6 +165,7 @@ export default {
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  
 }
 
 .recipe-preview .recipe-link .recipe-footer ul.recipe-overview {
@@ -142,6 +187,16 @@ export default {
   margin-bottom: 0px;
 }
 
+.recipe-seen {
+ color: rgb(146, 63, 184);  
+  text-decoration-color: rgb(146, 63, 184);
+}
+
+.recipe-seen:hover {  
+  text-decoration: underline;
+  text-decoration-color: rgb(146, 63, 184); 
+}
+
 .recipe-preview .recipe-link .recipe-footer ul.recipe-overview li {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -153,19 +208,25 @@ export default {
   width: 90px;
   display: table-cell;
   text-align: center;
+  text-decoration: bold;
 }
 
-.recipe-preview .recipe-indications {
-}
+/* .recipe-preview .recipe-indications {
+} */
 
 .recipe-preview .recipe-indications .recipe-favorite {
   background-color: white;
 }
+
+.recipe-preview .recipe-indications .recipe-is_favorite {
+  background-color: rgb(86, 155, 39);
+}
+
 #heart {
-  color: rgb(110, 20, 20);
+  color: rgb(111, 168, 106);
 }
 
 #heart:hover {
-  color: rgb(226, 52, 52);
+  color: rgb(17, 82, 9);
 }
 </style>
