@@ -2,15 +2,15 @@
   <div class="container">
     <h1 class="title">My Recipes Page</h1>
     <b-row>
-      <MyRecipePreviewList title=""/>
+      <MyFamilyRecipePreviewList title=""/>
     </b-row>
   </div>
 </template>
 <script>
-import MyRecipePreviewList from "../components/MyRecipePreviewList";
+import MyFamilyRecipePreviewList from "../components/MyFamilyRecipePreviewList";
 export default {
   components: {
-    MyRecipePreviewList
+    MyFamilyRecipePreviewList
   }
 };
 </script>

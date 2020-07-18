@@ -5,18 +5,18 @@
     </h3>
     <b-row>
       <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <FamilyRecipePreview class="FamilyRecipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import RecipePreview from "./RecipePreview.vue";
+import FamilyRecipePreview from "./FamilyRecipePreview.vue";
 export default {
   name: "MyRecipePreviewList",
   components: {
-    RecipePreview
+    FamilyRecipePreview
   },
   props: {
     title: {
@@ -40,7 +40,7 @@ export default {
         // vm.loading = true;
         // var dataStr = 'username='+vm.username+'&password='+vm.password
         const response = await this.axios.get(
-          "http://localhost:4000/users/getPersonalRecipes",{
+          "http://localhost:4000/users/getFamilyRecipes",{
             // withCredentials: true
             params: {
               user_id: this.$root.store.user_id

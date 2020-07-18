@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <h1 class="title">search your recipe</h1>
-    <b-col>
+    <b-row>
       <SearchRecipePreviewList title="search Recipes"/>
-    </b-col>
+    </b-row>
   </div>
 </template>
 <script>

@@ -57,7 +57,8 @@ export default {
         response = await this.axios.get(
           "http://localhost:4000/recipes/displayFullInformation",       
           {
-            params: { id: this.$route.params.recipeId }
+            params: { 
+              recipe_id: this.$route.params.recipeId }
           }
         );
 
@@ -81,7 +82,7 @@ export default {
         servings,
         extendedIngredients  
                 
-      } = response.data.recipe;//todo: ?
+      } = response.data.data[0];//todo: ?
 
       // let _instructions = analyzedInstructions
       //   .map((fstep) => {
