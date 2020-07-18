@@ -5,18 +5,18 @@
     </h3>
     <b-row>
       <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <MyRecipePreview class="MyRecipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import RecipePreview from "./RecipePreview.vue";
+import MyRecipePreview from "./MyRecipePreview.vue";
 export default {
   name: "MyRecipePreviewList",
   components: {
-    RecipePreview
+    MyRecipePreview
   },
   props: {
     title: {

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- <navbari></navbari> -->
     <div id="nav">
+     
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
       <router-link :to="{ name: 'search' }">Search</router-link>|
       <!-- {{ !$root.store.username }} -->
@@ -21,8 +23,13 @@
 </template>
 
 <script>
+// import navbari from "/components/navbar";
 export default {
+ 
   name: "App",
+  //  components: {
+  //   navbari 
+  // },
   methods: {
     async Logout() {
       try {
