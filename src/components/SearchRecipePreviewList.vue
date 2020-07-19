@@ -90,15 +90,27 @@
       </b-form-group>
 
     <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
+      <!-- <b-col v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
+      </b-col> -->  
+
+      <b-row v-for="(group, i) in recipesGroups" :key="group" :list="i">
+        <b-col v-for="recipe in recipes.slice(i * itemsPerRow, (i + 1) * itemsPerRow)" :key="recipe.id">
+          <RecipePreview class="recipePreview" :recipe="recipe" />
+        </b-col>
+      </b-row>
     </b-row>
+    
+      
+
     <b-row v-if="searchEmpty" class="empty">
         No search results :(
     </b-row>
   </b-container>
 </template>
+
+
+
 <script>
 import RecipePreview from "./RecipePreview.vue";
 import cuisines from "../assets/cuisines";
@@ -134,8 +146,14 @@ export default {
             intolerances: [{ value: null, text: "filtering by intolerances", disabled: true }],
             sortby_selected: null,
             searchEmpty: false,
+            itemsPerRow: 3,
         }; 
     },
+    computed: {
+      recipesGroups () {
+        return Array.from(Array(Math.ceil(this.recipes.length / this.itemsPerRow)).keys())
+      }
+  },
     mounted() {
     this.cuisines.push(...cuisines);
     this.diets.push(...diets);

@@ -9,10 +9,12 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div><b>Create by</b> {{ recipe.author }} </div>
+              <div><b>Ready in</b> {{ recipe.prep_time }} minutes</div>
+              <div><b>Likes:</b> {{ recipe.aggregateLikes }} likes</div>
+              <div><b>Cook for</b> {{ recipe.cook_for }} </div>
             </div>
-            Ingredients:
+            <b>Ingredients:</b>
             <ul>
               <li
                 v-for="(r, index) in recipe.extendedIngredients"
@@ -23,7 +25,7 @@
             </ul>
           </div>
           <div class="wrapped">
-            Instructions:
+            <b>Instructions:</b>
             <ol>
               {{recipe.instructions}}
             </ol>
