@@ -7,6 +7,9 @@
     >
       <div class="recipe-body">
         <img :src="recipe.image" class="recipe-image" />
+        <div class="text-over-image">
+          <div class="text"><b>To Full Recipe </b></div>
+        </div>
       </div>
       <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']">
         <div :title="recipe.title" class="recipe-title">{{ recipe.title }}</div>
@@ -22,7 +25,7 @@
     </router-link>
     <div class="recipe-indications">
       <b-button
-        v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']"
+        v-if="$root.store.username" v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']"
         @click="addToFavorites"
       >
         <i id="heart" class="fa fa-heart"></i>
@@ -176,6 +179,7 @@ export default {
 }
 
 .recipe-preview .recipe-link .recipe-body .recipe-image {
+  opacity: 1;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -185,22 +189,39 @@ export default {
   height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover;
+  background-size: cover; 
+  transition: .5s ease;
+  backface-visibility: hidden;
 }
 
-.recipe-preview .recipe-link .recipe-body .recipe-image:hover {
-  border: 3px solid #42b983;
+.recipe-preview .recipe-link:hover .recipe-image {
+   opacity: 0.3;
 }
+
+.recipe-preview .recipe-link .recipe-body .text-over-image {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.recipe-preview .recipe-link:hover .text-over-image{
+  opacity: 1;
+}
+
+.recipe-preview .recipe-link .recipe-body .text-over-image .text {  
+  color: rgb(12, 65, 33);
+  font-size: 20px; 
+} 
 
 .recipe-preview .recipe-link .recipe-footer {
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-.recipe-preview .recipe-link:hover {
-  text-decoration: underline;
-  text-decoration-color: rgb(35, 26, 163);
 }
 
 .recipe-preview .recipe-link .recipe-footer .recipe-title {
@@ -238,7 +259,7 @@ export default {
   text-decoration-color: rgb(146, 63, 184);
 }
 
-.recipe-seen:hover {
+.recipe-link:hover .recipe-seen {
   text-decoration: underline;
   text-decoration-color: rgb(146, 63, 184);
 }

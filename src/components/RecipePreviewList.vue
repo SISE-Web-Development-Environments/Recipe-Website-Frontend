@@ -1,15 +1,17 @@
 <template>
-  <b-container>
-    <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
-    
-      <b-row v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
-      </b-row>
-    
-  </b-container>
+<div>
+    <b-container>
+      <h3>
+        {{ title }}:
+        <slot></slot>
+      </h3>      
+        <b-row v-for="r in recipes" :key="r.id">
+          <RecipePreview class="recipePreview" :recipe="r"/>        
+        </b-row>      
+      </b-container>
+    <br>
+    <button v-if="isRandom" class="refresh" @click="refresh"> Refresh 3 Randoms Recipes </button>
+</div>
 </template>
 
 <script>
@@ -31,7 +33,8 @@ export default {
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
+      isRandom:false
     };
   },
   mounted() {
@@ -42,7 +45,8 @@ export default {
       try {
         let x = this.request;
         let response = null;
-        if(x=="random"){          
+        if(x=="random"){  
+          this.isRandom=true;        
           response = await this.axios.get(
           "http://localhost:4000/recipes/getThreeRandomRecipes"          
           );
@@ -65,6 +69,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+      refresh() {
+      this.updateRecipes();
     }
   }
 };
@@ -74,5 +81,14 @@ export default {
 .container {
   min-height: 800px;
  
+}
+.refresh {
+  background-color: rgb(51, 131, 58);
+  color: white;
+  text-align: center;
+  border: 3px solid green;
+}
+.refresh:hover{
+   background-color: rgb(23, 71, 27);
 }
 </style>
