@@ -94,7 +94,7 @@ export default {
       
       if (!this.seen) {
         try {
-          response = await this.axios.post(
+          const response = await this.axios.post(
             "http://localhost:4000/users/addSeenRecipe",
             {
               recipe_id: this.recipe.id

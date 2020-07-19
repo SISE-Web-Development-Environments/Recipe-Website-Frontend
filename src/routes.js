@@ -23,6 +23,11 @@ const routes = [
     component: () => import("./pages/SearchPage"),
   },
   {
+    path: "/myFavoriteRecipes",
+    name: "myFavoriteRecipes",
+    component: () => import("./pages/MyFavoriteRecipesPage"),
+  },
+  {
     path: "/myRecipes",
     name: "myRecipes",
     component: () => import("./pages/myRecipesPage"),
