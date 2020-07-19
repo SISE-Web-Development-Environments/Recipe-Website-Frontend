@@ -11,8 +11,8 @@
       <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']" >
         <div :title="recipe.title" class="recipe-title">{{ recipe.title }}</div>
         <ul class ="recipe-overview">
-          <li>{{ recipe.readyInMinutes }} minutes</li>
-          <li>{{ recipe.aggregateLikes }} likes</li>
+          <li><b>Ready in: {{ recipe.readyInMinutes }} minutes</b></li>
+          <li><b>{{ recipe.aggregateLikes }} likes</b></li>
         </ul>
       </div>
     </router-link>
@@ -20,6 +20,21 @@
       <b-button v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']" @click="addToFavorites">
         <i id="heart" class="fa fa-heart"></i>
       </b-button>
+      <b>    </b>
+      <div v-if="vegeterian" id="vegetrian" class="indication">
+         <i  class="fa fa-envira" aria-hidden="true"></i>
+        <b>  Vegetarian  </b>
+      </div>
+      <div  v-if="vegan" id="vegan" class="indication">
+        <i class="fa fa-tree" aria-hidden="true"></i>
+        <b>  Vegan  </b>
+      </div>
+      <div  v-if="glutenFree" id="gluten" class="indication">
+        <i class="fa fa-pagelines" aria-hidden="true"></i>
+        <b>  Gluten Free  </b>
+      </div>
+     
+      
     </div>
   </div>
 </template>
@@ -35,12 +50,16 @@ export default {
   data() {
     return {
       seen: false,
-      addedToFavorite: false
+      addedToFavorite: false,
+      vegeterian: false,
+      vegan: false,
+      glutenFree: false
     };
   },
   mounted() {
     this.updateIsFavorite();
     this.updateIsSeen();
+    this.checkIndications();
   },
   methods: {
     async updateIsFavorite() {
@@ -104,6 +123,12 @@ export default {
           console.log(error);
         }
       }
+    },
+
+    checkIndications(){
+      this.vegeterian = this.recipe.vegetarian;
+      this.vegan = this.recipe.vegan;
+      this.glutenFree = this.recipe.glutenFree;
     }
   }
 };
@@ -211,8 +236,10 @@ border: 3px solid #42b983;
   text-decoration: bold;
 }
 
-/* .recipe-preview .recipe-indications {
-} */
+.recipe-preview .recipe-indications .indication {
+   display: inline;
+   padding: 5px;  
+}
 
 .recipe-preview .recipe-indications .recipe-favorite {
   background-color: white;
