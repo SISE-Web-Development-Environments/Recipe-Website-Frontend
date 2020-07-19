@@ -53,6 +53,7 @@
                         </template>
                         <!-- <b-dropdown-item router-link :to="{ name: 'myFavourites' }"><b-icon icon="star-fill" style="color: #7952b3;"></b-icon>  Favorites</b-dropdown-item> -->
                         <!-- <b-dropdown-item router-link :to="{ name: 'myRecipe' }"><b-icon icon="receipt" style="color: #7952b3;"></b-icon>  My Recipe</b-dropdown-item> -->
+                        <b-dropdown-item router-link :to="{ name: 'myFavoriteRecipes' }"><b-icon icon="heart" style="color: #6fa86a;"></b-icon> My Favorite Recipes</b-dropdown-item>
                         <b-dropdown-item router-link :to="{ name: 'myRecipes' }"><b-icon icon="receipt" style="color: #6fa86a;"></b-icon> My Recipes</b-dropdown-item>
                         <b-dropdown-item router-link :to="{ name: 'myFamilyRecipes' }"><b-icon icon="people-fill" style="color: #6fa86a;"></b-icon> My Family Recipes</b-dropdown-item>
                         <!-- <b-dropdown-item router-link :to="{ name: 'familyRecipe' }"><b-icon icon="people-fill" style="color: #7952b3;"></b-icon>  Family Recipe</b-dropdown-item> -->
