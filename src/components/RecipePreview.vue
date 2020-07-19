@@ -8,24 +8,25 @@
       <div class="recipe-body">
         <img :src="recipe.image" class="recipe-image" />
         <div class="text-over-image">
-          <div class="text"><b>To Full Recipe </b></div>
+          <div class="text">
+            <b>Watch Full Recipe</b>
+          </div>
         </div>
       </div>
       <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']">
-        <div :title="recipe.title" class="recipe-title">{{ recipe.title }}</div>
+        <div :title="recipe.title" class="recipe-title">
+          <b>{{ recipe.title }}</b>
+        </div>
         <ul class="recipe-overview">
-          <li>
-            <b>Ready in: {{ recipe.readyInMinutes }} minutes</b>
-          </li>
-          <li>
-            <b>{{ recipe.aggregateLikes }} likes</b>
-          </li>
+          <li>Ready in: {{ recipe.readyInMinutes }} minutes</li>
+          <li>{{ recipe.aggregateLikes }} likes</li>
         </ul>
       </div>
     </router-link>
     <div class="recipe-indications">
       <b-button
-        v-if="$root.store.username" v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']"
+        v-if="$root.store.username"
+        v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']"
         @click="addToFavorites"
       >
         <i id="heart" class="fa fa-heart"></i>
@@ -44,6 +45,7 @@
         <b>Gluten Free</b>
       </div>
     </div>
+    <br />
   </div>
 </template>
 
@@ -65,11 +67,16 @@ export default {
     };
   },
   mounted() {
-    this.updateIsFavorite();
-    this.updateIsSeen();
+    this.forUsersOnly();
     this.checkIndications();
   },
   methods: {
+    forUsersOnly() {
+      if (this.$root.store.username) {
+        this.updateIsFavorite();
+        this.updateIsSeen();
+      }
+    },
     async updateIsFavorite() {
       try {
         const response = await this.axios.get(
@@ -189,13 +196,13 @@ export default {
   height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover; 
-  transition: .5s ease;
+  background-size: cover;
+  transition: 0.5s ease;
   backface-visibility: hidden;
 }
 
 .recipe-preview .recipe-link:hover .recipe-image {
-   opacity: 0.3;
+  opacity: 0.3;
 }
 
 .recipe-preview .recipe-link .recipe-body .text-over-image {
@@ -209,14 +216,14 @@ export default {
   text-align: center;
 }
 
-.recipe-preview .recipe-link:hover .text-over-image{
+.recipe-preview .recipe-link:hover .text-over-image {
   opacity: 1;
 }
 
-.recipe-preview .recipe-link .recipe-body .text-over-image .text {  
+.recipe-preview .recipe-link .recipe-body .text-over-image .text {
   color: rgb(12, 65, 33);
-  font-size: 20px; 
-} 
+  font-size: 20px;
+}
 
 .recipe-preview .recipe-link .recipe-footer {
   width: 100%;
@@ -254,16 +261,6 @@ export default {
   margin-bottom: 0px;
 }
 
-.recipe-seen {
-  color: rgb(146, 63, 184);
-  text-decoration-color: rgb(146, 63, 184);
-}
-
-.recipe-link:hover .recipe-seen {
-  text-decoration: underline;
-  text-decoration-color: rgb(146, 63, 184);
-}
-
 .recipe-preview .recipe-link .recipe-footer ul.recipe-overview li {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -276,6 +273,16 @@ export default {
   display: table-cell;
   text-align: center;
   text-decoration: bold;
+}
+
+.recipe-seen {
+  color: rgb(146, 63, 184);
+  text-decoration-color: rgb(146, 63, 184);
+}
+
+.recipe-link:hover .recipe-seen {
+  text-decoration: underline;
+  text-decoration-color: rgb(146, 63, 184);
 }
 
 .recipe-preview .recipe-indications .indication {

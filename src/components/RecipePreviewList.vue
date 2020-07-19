@@ -5,8 +5,8 @@
         {{ title }}:
         <slot></slot>
       </h3>      
-        <b-row v-for="r in recipes" :key="r.id">
-          <RecipePreview class="recipePreview" :recipe="r"/>        
+        <b-row v-for="r in recipes" :key="r.id">            
+          <RecipePreview class="recipePreview" :recipe="r"/>                
         </b-row>      
       </b-container>
     <br>
