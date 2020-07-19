@@ -23,11 +23,10 @@
             </ul>
           </div>
           <div class="wrapped">
-            Instructions:
             <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
-              </li>
+              
+                {{ recipe.instructions }}
+              
             </ol>
           </div>
         </div>

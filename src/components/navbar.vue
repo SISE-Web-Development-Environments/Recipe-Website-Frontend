@@ -4,6 +4,7 @@
     <span v-if="!$root.store.username">
         <b-navbar toggleable="lg" type="dark" variant="dark">
             <b-navbar-brand href='/main'>
+            <!-- <router-link :to="{ name: 'main' }">Vue Recipes</router-link> -->
                 <p class="h3 mb-2"><b-icon icon="house-door-fill" style="color: #7952b3;"></b-icon></p>
             </b-navbar-brand>
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -49,14 +50,9 @@
                             <em> {{$root.store.username}}</em>
                         </template>
                         <b-dropdown-item router-link :to="{ name: 'myFavourites' }"><b-icon icon="star-fill" style="color: #7952b3;"></b-icon>  Favorites</b-dropdown-item>
-                        <b-dropdown-item router-link :to="{ name: 'myRecipes' }"><b-icon icon="receipt" style="color: #7952b3;"></b-icon>  My Recipe</b-dropdown-item>
-                        <b-dropdown-item router-link :to="{ name: 'myFamilyRecipes' }"><b-icon icon="people-fill" style="color: #7952b3;"></b-icon>  Family Recipe</b-dropdown-item>
+                        <b-dropdown-item router-link :to="{ name: 'myRecipe' }"><b-icon icon="receipt" style="color: #7952b3;"></b-icon>  My Recipe</b-dropdown-item>
+                        <b-dropdown-item router-link :to="{ name: 'familyRecipe' }"><b-icon icon="people-fill" style="color: #7952b3;"></b-icon>  Family Recipe</b-dropdown-item>
                     </b-nav-item-dropdown>
-                    <b-nav-item></b-nav-item>
-                    <b-nav-item>
-                         <AddNewRecipe> Add New Recipe</AddNewRecipe>
-                    </b-nav-item>
-                    <b-nav-item></b-nav-item>
                     <b-nav-item router-link :to="{ name: 'about' }">About</b-nav-item>
                 </b-navbar-nav>
                  <b-navbar-nav class="ml-auto">
@@ -82,14 +78,11 @@
 <script>
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import AddNewRecipe from '../AddNewRecipeModal'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 // var user = this.$root.store.username
 export default {
-    components: {
-        AddNewRecipe
-    },
+
     methods: {
         Logout() {
         this.$root.store.logout();
