@@ -8,33 +8,38 @@
       <div class="recipe-body">
         <img :src="recipe.image" class="recipe-image" />
       </div>
-      <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']" >
+      <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']">
         <div :title="recipe.title" class="recipe-title">{{ recipe.title }}</div>
-        <ul class ="recipe-overview">
-          <li><b>Ready in: {{ recipe.readyInMinutes }} minutes</b></li>
-          <li><b>{{ recipe.aggregateLikes }} likes</b></li>
+        <ul class="recipe-overview">
+          <li>
+            <b>Ready in: {{ recipe.readyInMinutes }} minutes</b>
+          </li>
+          <li>
+            <b>{{ recipe.aggregateLikes }} likes</b>
+          </li>
         </ul>
       </div>
     </router-link>
     <div class="recipe-indications">
-      <b-button v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']" @click="addToFavorites">
+      <b-button
+        v-bind:class="[addedToFavorite ? 'recipe-is_favorite' : '', 'recipe-favorite']"
+        @click="addToFavorites"
+      >
         <i id="heart" class="fa fa-heart"></i>
       </b-button>
-      <b>    </b>
+      <b></b>
       <div v-if="vegeterian" id="vegetrian" class="indication">
-         <i  class="fa fa-envira" aria-hidden="true"></i>
-        <b>  Vegetarian  </b>
+        <i class="fa fa-envira" aria-hidden="true"></i>
+        <b>Vegetarian</b>
       </div>
-      <div  v-if="vegan" id="vegan" class="indication">
+      <div v-if="vegan" id="vegan" class="indication">
         <i class="fa fa-tree" aria-hidden="true"></i>
-        <b>  Vegan  </b>
+        <b>Vegan</b>
       </div>
-      <div  v-if="glutenFree" id="gluten" class="indication">
+      <div v-if="glutenFree" id="gluten" class="indication">
         <i class="fa fa-pagelines" aria-hidden="true"></i>
-        <b>  Gluten Free  </b>
+        <b>Gluten Free</b>
       </div>
-     
-      
     </div>
   </div>
 </template>
@@ -71,14 +76,14 @@ export default {
               recipe_id: this.recipe.id
             }
           }
-        );            
+        );
         this.addedToFavorite = response.data.answer;
       } catch (error) {
         console.log(error);
       }
     },
 
-     async updateIsSeen() {
+    async updateIsSeen() {
       try {
         const response = await this.axios.get(
           "http://localhost:4000/users/isSeen",
@@ -87,7 +92,7 @@ export default {
               recipe_id: this.recipe.id
             }
           }
-        );            
+        );
         this.seen = response.data.answer;
       } catch (error) {
         console.log(error);
@@ -101,16 +106,16 @@ export default {
             "http://localhost:4000/users/addFavoriteRecipe",
             {
               recipe_id: this.recipe.id
-            }            
+            }
           );
-          this.addedToFavorite=true;
+          this.addedToFavorite = true;
         } catch (error) {
           console.log(error);
         }
       }
     },
+
     async addToSeens() {
-      
       if (!this.seen) {
         try {
           const response = await this.axios.post(
@@ -119,13 +124,30 @@ export default {
               recipe_id: this.recipe.id
             }
           );
+          this.seen = true;
         } catch (error) {
           console.log(error);
         }
+      } else {
+        this.updateSeenRecipe();
       }
     },
 
-    checkIndications(){
+    async updateSeenRecipe() {
+      try {
+        const response = await this.axios.post(
+          "http://localhost:4000/users/updateSeenRecipe",
+          {
+            recipe_id: this.recipe.id
+          }
+        );
+        this.seen = true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    checkIndications() {
       this.vegeterian = this.recipe.vegetarian;
       this.vegan = this.recipe.vegan;
       this.glutenFree = this.recipe.glutenFree;
@@ -140,7 +162,7 @@ export default {
   position: relative;
   width: 60%;
   height: 40%;
-  margin: 10px 10px;  
+  margin: 10px 10px;
 }
 
 /* .recipe-preview .recipe-link:hover {
@@ -167,18 +189,18 @@ export default {
 }
 
 .recipe-preview .recipe-link .recipe-body .recipe-image:hover {
-border: 3px solid #42b983;
+  border: 3px solid #42b983;
 }
 
 .recipe-preview .recipe-link .recipe-footer {
   width: 100%;
   height: 100%;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 .recipe-preview .recipe-link:hover {
   text-decoration: underline;
-  text-decoration-color: rgb(35, 26, 163);  
+  text-decoration-color: rgb(35, 26, 163);
 }
 
 .recipe-preview .recipe-link .recipe-footer .recipe-title {
@@ -190,7 +212,6 @@ border: 3px solid #42b983;
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  
 }
 
 .recipe-preview .recipe-link .recipe-footer ul.recipe-overview {
@@ -213,13 +234,13 @@ border: 3px solid #42b983;
 }
 
 .recipe-seen {
- color: rgb(146, 63, 184);  
+  color: rgb(146, 63, 184);
   text-decoration-color: rgb(146, 63, 184);
 }
 
-.recipe-seen:hover {  
+.recipe-seen:hover {
   text-decoration: underline;
-  text-decoration-color: rgb(146, 63, 184); 
+  text-decoration-color: rgb(146, 63, 184);
 }
 
 .recipe-preview .recipe-link .recipe-footer ul.recipe-overview li {
@@ -237,8 +258,8 @@ border: 3px solid #42b983;
 }
 
 .recipe-preview .recipe-indications .indication {
-   display: inline;
-   padding: 5px;  
+  display: inline;
+  padding: 5px;
 }
 
 .recipe-preview .recipe-indications .recipe-favorite {

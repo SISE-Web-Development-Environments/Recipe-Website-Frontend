@@ -124,6 +124,27 @@
           v-else-if="!$v.form.confirmedPassword.sameAsPassword"
         >The confirmed password is not equal to the original password</b-form-invalid-feedback>
       </b-form-group>
+       <b-form-group
+        id="input-group-firstname"
+        label-cols-sm="3"
+        label="Profile Picture:"
+        label-for="picture"
+      >
+        <b-form-input
+          id="picture"
+          type="url"
+          v-model="$v.form.picture.$model"
+          :state="validateState('picture')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.picture.required">
+          Profile Picture is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-else-if="!$v.form.picture.url"
+        >
+          Invalid URL
+        </b-form-invalid-feedback>
+      </b-form-group>
 
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button type="submit" variant="primary" style="width:250px;" class="ml-5 w-75">Register</b-button>
@@ -151,7 +172,8 @@ import {
   maxLength,
   alpha,
   sameAs,
-  email
+  email,
+  url
 } from "vuelidate/lib/validators";
 
 export default {
@@ -166,6 +188,7 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
+         picture: "",
         submitError: undefined
       },
       countries: [{ value: null, text: "", disabled: true }],
@@ -202,6 +225,10 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+       picture: {
+        required,
+        url
       }
     }
   },
