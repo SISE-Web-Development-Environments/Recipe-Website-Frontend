@@ -1,6 +1,7 @@
+ 
 <template>
   <div id="app">
-    <!-- <navbari></navbari> -->
+    <navbari></navbari>
     <div id="nav">
      
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
@@ -20,16 +21,18 @@
     </div>
     <router-view />
   </div>
+
+  
 </template>
 
 <script>
-// import navbari from "/components/navbar";
+import navbari from "../src/components/navbar";
 export default {
  
   name: "App",
-  //  components: {
-  //   navbari 
-  // },
+   components: {
+    navbari 
+  },
   methods: {
     async Logout() {
       try {
@@ -44,7 +47,6 @@ export default {
       }
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
-
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
@@ -55,7 +57,6 @@ export default {
 
 <style lang="scss">
 @import "@/scss/form-style.scss";
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -63,17 +64,15 @@ export default {
   color: #2c3e50;
   min-height: 100vh;
 }
-
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
