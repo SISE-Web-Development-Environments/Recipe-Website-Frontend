@@ -1,4 +1,4 @@
-# assignment-3-3-Michal_Roi
+# assignment-3-3-roi-michal
 
 
 Assigment 3.3
