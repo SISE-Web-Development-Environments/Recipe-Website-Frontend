@@ -1,15 +1,15 @@
 <template>
-  <router-link
-    :to="{ name: 'myRecipe', params: { recipe: recipe } }"
-    class="recipe-preview"
-  >
+  <router-link :to="{ name: 'myRecipe', params: { recipe: recipe } }" class="recipe-preview">
     <div class="recipe-body">
       <img :src="recipe.image" class="recipe-image" />
+      <div class="text-over-image">
+        <div class="text">
+          <b>Watch Full Recipe</b>
+        </div>
+      </div>
     </div>
     <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
-      </div>
+      <div :title="recipe.title" class="recipe-title"><b>{{ recipe.title }}</b></div>
       <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
@@ -24,26 +24,26 @@ export default {
     recipe: {
       type: Object,
       required: true
-    }  
+    }
   }
 };
 </script>
 
 <style scoped>
 .recipe-preview {
-  display: inline-block;
+  display: block;
   width: 60%;
   height: 40%;
   position: relative;
-  margin: 10px 10px;
 }
 .recipe-preview > .recipe-body {
-  width: 100%;
-  height: 80%;
+  display: block;
   position: relative;
+  margin: 10px 10px;
 }
 
 .recipe-preview .recipe-body .recipe-image {
+  opacity: 1;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -54,6 +54,32 @@ export default {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.recipe-preview .recipe-body:hover .recipe-image {
+  opacity: 0.3;
+}
+
+.recipe-preview .recipe-body .text-over-image {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.recipe-preview .recipe-body:hover .text-over-image {
+  opacity: 1;
+}
+
+.recipe-preview .recipe-body .text-over-image .text {
+  color: rgb(12, 65, 33);
+  font-size: 20px;
 }
 
 .recipe-preview .recipe-footer {
@@ -102,6 +128,6 @@ export default {
   flex-grow: 1;
   width: 90px;
   display: table-cell;
-  text-align: center;
+  
 }
 </style>

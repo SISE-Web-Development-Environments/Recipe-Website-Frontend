@@ -13,6 +13,7 @@
           </div>
         </div>
       </div>
+
       <div v-bind:class="[seen ? 'recipe-seen' : '', 'recipe-footer']">
         <div :title="recipe.title" class="recipe-title">
           <b>{{ recipe.title }}</b>
@@ -168,16 +169,17 @@ export default {
 
 <style scoped>
 .recipe-preview {
-  display: inline-block;
-  position: relative;
+  display: block;
+  position: relative; 
   width: 60%;
-  height: 40%;
-  margin: 10px 10px;
+  height: 40%;  
 }
 
-/* .recipe-preview .recipe-link:hover {
-  color:saddlebrown
-} */
+.recipe-preview .recipe-link{ 
+  display:block; 
+  position: relative;   
+  margin: 10px 10px;  
+}
 
 .recipe-preview .recipe-link .recipe-body {
   width: 100%;
@@ -228,7 +230,8 @@ export default {
 .recipe-preview .recipe-link .recipe-footer {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden;   
+  display: block;
 }
 
 .recipe-preview .recipe-link .recipe-footer .recipe-title {
