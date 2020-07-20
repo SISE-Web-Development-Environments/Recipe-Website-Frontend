@@ -37,15 +37,15 @@
         </div>
 
         <div>
-          <a href=" https://app.swaggerhub.com/apis/avitalze/recipeWebUpdate/1.9"><b>Part 3.1 : API</b></a>
+          <a href="https://app.swaggerhub.com/apis-docs/roikatz16/recepies_API/1.0.0"><b>Part 1 : API</b></a>
           |
           <a
-            href="https://github.com/SISE-Web-Development-Environments/assignment-3-2-or_avital"
-          ><b>Part 3.2 : Backend</b></a>
+            href="https://github.com/SISE-Web-Development-Environments/assignment-3-2-roi_michal"
+          ><b>Part 2 : Backend</b></a>
           |
           <a
-            href="https://github.com/SISE-Web-Development-Environments/assignment-3-3-or_avital"
-          ><b>Part 3.3 : Fronted</b></a>
+            href="https://github.com/SISE-Web-Development-Environments/assignment-3-3-roi_michal"
+          ><b>Part 3 : Fronted</b></a>
         </div>
       </section>
     </b-container>
