@@ -55,11 +55,6 @@ export default {
           response = await this.axios.get(
           "http://localhost:4000/users/getLastThreeSeenRecipes"          
           );
-        }
-         if(x=="favorite"){          
-          response = await this.axios.get(
-          "http://localhost:4000/users/getFavoriteRecipes"          
-          );
         }       
         
         const recipes = response.data.data;// instead of data.recipes
