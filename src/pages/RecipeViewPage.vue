@@ -9,10 +9,24 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div><b>Ready in</b> {{ recipe.readyInMinutes }} minutes</div>
+              <div><b>Likes:</b> {{ recipe.aggregateLikes }} likes</div>
+              <div><b>Servings:</b> {{ recipe.servings }} </div>
+                -----------------------
+              <div v-if="vegeterian" id="vegetrian" class="indication">
+                <i class="fa fa-envira" aria-hidden="true"></i>
+                <b>Vegetarian</b>
+              </div>
+              <div v-if="vegan" id="vegan" class="indication">
+                <i class="fa fa-tree" aria-hidden="true"></i>
+                <b>Vegan</b>
+              </div>
+              <div v-if="glutenFree" id="gluten" class="indication">
+                <i class="fa fa-pagelines" aria-hidden="true"></i>
+                <b>Gluten Free</b>
+              </div>
             </div>
-            Ingredients:
+            <b>Ingredients:</b>
             <ul>
               <li
                 v-for="(r, index) in recipe.extendedIngredients"
@@ -21,8 +35,11 @@
                 {{ r.original }}
               </li>
             </ul>
+            
+
           </div>
           <div class="wrapped">
+            <b>Instructions:</b>
             <ol>
               
                 {{ recipe.instructions }}
@@ -44,7 +61,10 @@
 export default {
   data() {
     return {
-      recipe: null
+      recipe: null,
+      vegeterian: false,
+      vegan: false,
+      glutenFree: false
     };
   },
   async created() {
@@ -104,10 +124,21 @@ export default {
       };
 
       this.recipe = _recipe;
+      this.checkIndications();
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+  methods:{
+    checkIndications() {
+        this.vegeterian = this.recipe.vegetarian;
+        this.vegan = this.recipe.vegan;
+        this.glutenFree = this.recipe.glutenFree;
+      },
+  },
+  // mounted() {
+  //   this.checkIndications();
+  // }
 };
 </script>
 

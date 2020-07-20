@@ -13,15 +13,19 @@
               <div><b>Ready in</b> {{ recipe.prep_time }} minutes</div>
               <div><b>Likes:</b> {{ recipe.aggregateLikes }} likes</div>
               <div><b>Cook for</b> {{ recipe.cook_for }} </div>
+              -----------------------
+              <div v-if="recipe.vegan == 1" id="vegan" class="indication">
+                <i class="fa fa-tree" aria-hidden="true"></i>
+                <b>Vegan</b>
+              </div>
+              <div v-if="recipe.gluten_free == 1" id="gluten" class="indication">
+                <i class="fa fa-pagelines" aria-hidden="true"></i>
+                <b>Gluten Free</b>
+              </div>
             </div>
             <b>Ingredients:</b>
             <ul>
-              <li
-                v-for="(r, index) in recipe.extendedIngredients"
-                :key="index + '_' + r.id"
-              >
-                {{ r.original }}
-              </li>
+                {{recipe.component }}
             </ul>
           </div>
           <div class="wrapped">

@@ -9,10 +9,22 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div><b>Ready in</b> {{ recipe.readyInMinutes }} minutes</div>
+              <div><b>Likes:</b> {{ recipe.aggregateLikes }} likes</div>
+
+              -----------------------
+
+              <div v-if="recipe.vegan == 1" id="vegan" class="indication">
+                <i class="fa fa-tree" aria-hidden="true"></i>
+                <b>Vegan</b>
+              </div>
+              <div v-if="recipe.glutenFree == 1" id="gluten" class="indication">
+                <i class="fa fa-pagelines" aria-hidden="true"></i>
+                <b>Gluten Free</b>
+              </div>
+
             </div>
-            Ingredients:
+            <!-- Ingredients:
             <ul>
               <li
                 v-for="(r, index) in recipe.extendedIngredients"
@@ -20,10 +32,10 @@
               >
                 {{ r.original }}
               </li>
-            </ul>
+            </ul> -->
           </div>
           <div class="wrapped">
-            Instructions:
+           <b> Instructions:</b>
             <ol>
               {{recipe.instructions}}
             </ol>
@@ -43,7 +55,10 @@
 export default {
   data() {
     return {
-      recipe: null
+      recipe: null,
+      vegeterian: false,
+      vegan: false,
+      glutenFree: false
     };
   },
   async created() {
@@ -103,10 +118,21 @@ export default {
       };
 
       this.recipe = _recipe;
+      this.checkIndications();
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+  methods:{
+    checkIndications() {
+        if (this.recipe.vegetarian==1){
+          this.vegeterian = true;
+        }
+        
+        this.vegan = this.recipe.vegan;
+        this.glutenFree = this.recipe.gluten_free;
+      },
+  },
 };
 </script>
 
