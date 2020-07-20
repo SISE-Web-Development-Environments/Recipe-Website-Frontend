@@ -18,14 +18,14 @@
             </b-navbar-nav>
             <b-navbar-nav>
               <b-nav-item router-link :to="{ name: 'register' }">
-                <b-icon icon="person-plus" style="color: #6fa86a;"></b-icon>Register
+                <b-icon icon="person-plus" style="color: #6fa86a; margin-right: 10px"></b-icon>Register
               </b-nav-item>
               <b-nav-item></b-nav-item>
               <b-nav-item router-link :to="{ name: 'about' }">About</b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
               <b-nav-item router-link :to="{ name: 'search' }">
-                <b-icon icon="search" style="color: #6fa86a;"></b-icon>Search
+                <b-icon icon="search" style="color: #6fa86a; margin-right: 5px"></b-icon>Search
               </b-nav-item>
               <b-nav-item></b-nav-item>
               <b-nav-item></b-nav-item>
@@ -34,7 +34,7 @@
                 <b-nav-item></b-nav-item>
               </b-navbar-nav>
               <b-nav-item router-link :to="{ name: 'login' }">
-                <b-icon icon="box-arrow-in-right" style="color: #6fa86a;"></b-icon>Login
+                <b-icon icon="box-arrow-in-right" style="color: #6fa86a; margin-right: 10px"></b-icon>Login
               </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
@@ -45,7 +45,7 @@
         <b-navbar toggleable="lg" type="dark" variant="dark">
           <b-navbar-brand href="/main">
             <p class="h3 mb-2">
-              <b-icon icon="house-door-fill" style="color: #6fa86a;"></b-icon>
+              <b-icon icon="house-door-fill" style="color: #6fa86a; "></b-icon>
             </p>
           </b-navbar-brand>
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -61,13 +61,13 @@
                 <!-- <b-dropdown-item router-link :to="{ name: 'myFavourites' }"><b-icon icon="star-fill" style="color: #7952b3;"></b-icon>  Favorites</b-dropdown-item> -->
                 <!-- <b-dropdown-item router-link :to="{ name: 'myRecipe' }"><b-icon icon="receipt" style="color: #7952b3;"></b-icon>  My Recipe</b-dropdown-item> -->
                 <b-dropdown-item router-link :to="{ name: 'myFavoriteRecipes' }">
-                  <b-icon icon="heart" style="color: #6fa86a;"></b-icon>My Favorite Recipes
+                  <b-icon icon="heart" style="color: #6fa86a; margin-right: 10px"></b-icon>My Favorite Recipes
                 </b-dropdown-item>
                 <b-dropdown-item router-link :to="{ name: 'myRecipes' }">
-                  <b-icon icon="receipt" style="color: #6fa86a;"></b-icon>My Recipes
+                  <b-icon icon="receipt" style="color: #6fa86a; margin-right: 10px"></b-icon>My Recipes
                 </b-dropdown-item>
                 <b-dropdown-item router-link :to="{ name: 'myFamilyRecipes' }">
-                  <b-icon icon="people-fill" style="color: #6fa86a;"></b-icon>My Family Recipes
+                  <b-icon icon="people-fill" style="color: #6fa86a; margin-right: 10px"></b-icon>My Family Recipes
                 </b-dropdown-item>
                 <!-- <b-dropdown-item router-link :to="{ name: 'familyRecipe' }"><b-icon icon="people-fill" style="color: #7952b3;"></b-icon>  Family Recipe</b-dropdown-item> -->
               </b-nav-item-dropdown>
@@ -75,7 +75,7 @@
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
               <b-nav-item router-link :to="{ name: 'search' }">
-                <b-icon icon="search" style="color: #6fa86a;"></b-icon>Search
+                <b-icon icon="search" style="color: #6fa86a; margin-right: 5px"></b-icon>Search
               </b-nav-item>
               <b-nav-item></b-nav-item>
               <b-nav-item></b-nav-item>
@@ -84,7 +84,7 @@
                 <b-nav-item></b-nav-item>
               </b-navbar-nav>
               <b-nav-item @click="Logout">
-                <b-icon icon="box-arrow-left" style="color: #6fa86a;"></b-icon>Logout
+                <b-icon icon="box-arrow-left" style="color: #6fa86a; margin-right: 10px"></b-icon>Logout
               </b-nav-item>
             </b-navbar-nav>
           </b-collapse>

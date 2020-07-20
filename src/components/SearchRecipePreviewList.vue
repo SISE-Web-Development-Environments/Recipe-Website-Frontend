@@ -146,7 +146,7 @@ export default {
             intolerances: [{ value: null, text: "filtering by intolerances", disabled: true }],
             sortby_selected: null,
             searchEmpty: false,
-            itemsPerRow: 3,
+            itemsPerRow: 2,
         }; 
     },
     computed: {
