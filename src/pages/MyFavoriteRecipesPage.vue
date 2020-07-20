@@ -2,17 +2,17 @@
   <div class="container">
     <h1 class="title">Favorite Recipes</h1>
     <b-row>      
-        <RecipePreviewList title="My Recipes" request="favorite" class="RandomRecipes center" />     
+        <FavoriteRecipePreviewList title="My Recipes" request="favorite" class="RandomRecipes center" />     
     </b-row>
   </div>
 </template>
 
 <script>
-import RecipePreviewList from "../components/RecipePreviewList";
+import FavoriteRecipePreviewList from "../components/FavoriteRecipePreviewList";
 export default {
   name: "MyFavoriteRecipesPage",
   components: {
-    RecipePreviewList    
+    FavoriteRecipePreviewList    
   }
 }
 </script>
