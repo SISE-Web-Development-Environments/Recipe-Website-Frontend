@@ -1,4 +1,4 @@
-# Recipe website - fromtend
+# Recipe website - frontend
 
 
 Recipe - frontend side using Vue.js
